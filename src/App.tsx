@@ -20,15 +20,13 @@ interface Prestamo {
 
 const equiposIniciales: Equipo[] = [
   { id: 1, nombre: 'Osciloscopio Rigol', serie: 'OSC-001', categoria: 'Osciloscopio', estado: 'Disponible' },
-  { id: 2, nombre: 'Laptop Dell', serie: 'LAP-002', categoria: 'Laptop', estado: 'Prestado' },
+  { id: 2, nombre: 'Laptop Dell', serie: 'LAP-002', categoria: 'Laptop', estado: 'Disponible' },
   { id: 3, nombre: 'Kit Arduino Uno', serie: 'ARD-003', categoria: 'Kit Arduino', estado: 'Disponible' },
   { id: 4, nombre: 'Multímetro Fluke', serie: 'MUL-004', categoria: 'Multímetro', estado: 'En Mantenimiento' },
   { id: 5, nombre: 'Laptop Lenovo', serie: 'LAP-005', categoria: 'Laptop', estado: 'Disponible' },
 ]
 
-const prestamosIniciales: Prestamo[] = [
-  { id: 1, equipoId: 2, matricula: '20090123', nombre: 'Ana Torres', devolucion: '2026-12-01T14:00' },
-]
+const prestamosIniciales: Prestamo[] = []
 
 function App() {
   const [vista, setVista] = useState('catalogo')
@@ -96,7 +94,6 @@ function App() {
         <button onClick={() => setVista('admin')}>Préstamos activos</button>
       </div>
 
-      {/* INTERFAZ 1: Catálogo */}
       {vista === 'catalogo' && (
         <div>
           <h2>Catálogo de equipos</h2>
@@ -115,7 +112,6 @@ function App() {
         </div>
       )}
 
-      {/* INTERFAZ 2: Formulario */}
       {vista === 'formulario' && (
         <div>
           <h2>Solicitud de préstamo</h2>
@@ -131,7 +127,7 @@ function App() {
             </select>
 
             <label>Matrícula:</label>
-            <input type="text" value={matricula} onChange={(e) => setMatricula(e.target.value)} />
+            <input type="text" maxLength={9} value={matricula} onChange={(e) => setMatricula(e.target.value)} />
 
             <label>Nombre del estudiante:</label>
             <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} />
@@ -146,7 +142,6 @@ function App() {
         </div>
       )}
 
-      {/* INTERFAZ 3: Administración */}
       {vista === 'admin' && (
         <div>
           <h2>Préstamos activos</h2>
